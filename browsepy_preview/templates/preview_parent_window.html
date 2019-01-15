@@ -36,7 +36,8 @@
     }
 
     function preview_append(mimetype, url) {
-      var doc = window.frames["preview-frame"].document;
+      var win = window.frames["preview-frame"];
+      var doc = win.document;
       var container = doc.createElement("div");
       var label = doc.createElement("div");
       var filename = doc.createElement("span");
@@ -61,6 +62,7 @@
       label.style.cursor = "not-allowed";
       label.addEventListener("click", function () { container.parentNode.removeChild(container); }); 
       doc.body.append(container);
+      win.scrollTo(0, doc.body.scrollHeight);
     }
 
     document.addEventListener("DOMContentLoaded", function() {

@@ -9,6 +9,7 @@ else {
             var element = elements[i];
             element.addEventListener("click", previewClicked);
         }
+        window.parent.history.replaceState(null, window.location, window.location);
     });
 }
 
