@@ -1,3 +1,17 @@
 span.filetype {
     padding: 0.5em;
 }
+
+div.label {
+    padding: 0.5em;
+    background: #ddd;
+}
+
+div.content {
+    padding: 0.5em;
+}
+
+div.container {
+    border: 1px black solid;
+    margin-bottom: 0.5em;
+}

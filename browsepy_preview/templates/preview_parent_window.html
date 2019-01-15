@@ -45,9 +45,10 @@
       filename.appendChild(doc.createTextNode(url));
       var type = doc.createElement("span");
       type.classList.add("filetype");
-      type.appendChild(doc.createTextNode(mimetype));
+      type.appendChild(doc.createTextNode("type: " + mimetype));
       label.appendChild(filename);
       label.appendChild(type);
+      label.classList.add("label");
       var content = doc.createElement("div");
       if (mimetype.startsWith("image/")) {
         var img = doc.createElement("img");
@@ -59,8 +60,10 @@
         // nothing to load. immediately scroll
         win.setTimeout(function () { win.scrollTo(0, doc.body.scrollHeight); }, 0);
       }
+      content.classList.add("content");
       container.appendChild(label);
       container.appendChild(content);
+      container.classList.add("container");
       label.style.cursor = "not-allowed";
       label.addEventListener("click", function () { container.parentNode.removeChild(container); });
       doc.body.append(container);
