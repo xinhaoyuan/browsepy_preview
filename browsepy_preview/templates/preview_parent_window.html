@@ -1,0 +1,34 @@
+<head>
+  <title></title>
+  <style>
+    iframe.main {
+      position:absolute;
+      left:0;
+      top:0;
+      bottom:0;
+      right:0;
+      height:100%;
+      width:50%;
+      border:0;
+    }
+    iframe.preview {
+      position:absolute;
+      left:50%;
+      top:0;
+      bottom:0;
+      right:0;
+      height:100%;
+      width:50%;
+      border:0;
+    }
+  </style>
+  <script>
+    function preview_open(url) {
+      window.frames["preview-frame"].location = url;
+    }
+  </script>
+</head>
+<body>
+  <iframe class="main" name="main-frame" src="/{{path}}"></iframe>
+  <iframe class="preview" id="preview-frame" name="preview-frame"></iframe>
+</body>
