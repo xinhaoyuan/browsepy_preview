@@ -14,6 +14,11 @@ setuptools.setup(
     long_description_content_type = "text/markdown",
     url = "https://github.com/xinhaoyuan/browsepy_preview",
     packages = setuptools.find_packages(),
+    package_data = {"browsepy_preview" :
+                    [ "static/javascript/main.js",
+                      "static/css/styles.css",
+                      "templates/preview_parent_window.html"
+                    ]},
     install_requires = ["browsepy"],
     classifiers = [
         "Programming Language :: Python :: 3",
