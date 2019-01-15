@@ -52,17 +52,18 @@
       if (mimetype.startsWith("image/")) {
         var img = doc.createElement("img");
         img.src = url;
+        img.addEventListener("load", function () { win.scrollTo(0, doc.body.scrollHeight); });
         content.appendChild(img);
       }
       else {
-        // nothing to show
+        // nothing to load. immediately scroll
+        win.setTimeout(function () { win.scrollTo(0, doc.body.scrollHeight); }, 0);
       }
       container.appendChild(label);
       container.appendChild(content);
       label.style.cursor = "not-allowed";
-      label.addEventListener("click", function () { container.parentNode.removeChild(container); }); 
+      label.addEventListener("click", function () { container.parentNode.removeChild(container); });
       doc.body.append(container);
-      win.scrollTo(0, doc.body.scrollHeight);
     }
 
     document.addEventListener("DOMContentLoaded", function() {
