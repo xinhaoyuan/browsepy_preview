@@ -1,6 +1,7 @@
 import flask
 import os
 import browsepy
+import json
 
 __basedir__ = os.path.dirname(os.path.abspath(__file__))
 
@@ -20,8 +21,14 @@ def detect_preview_mimetype(path, sep = os.sep):
         return extensions.get(ext, None)
     return None
 
-@preview.route('/preview/<path:path>')
-def preview_file(path):
+@preview.route('/preview_info/<path:path>')
+def preview_info(path):
+    file = browsepy.file.Node.from_urlpath(path)
+    return flask.Response(json.dumps({ "mimetype" : file.type, "url" : "/preview/view/" + path}),
+                          mimetype = "text/json")
+
+@preview.route('/view/<path:path>')
+def view_file(path):
     # copied from open in browsepy, but explicitly disable cache
     try:
         file = browsepy.file.Node.from_urlpath(path)
@@ -63,6 +70,6 @@ def register_plugin(manager):
         place = 'entry-actions',
         css = 'preview',
         type = 'button',
-        endpoint = 'preview.preview_file',
+        endpoint = 'preview.preview_info',
         text = "Preview",
         filter = preview_filter)

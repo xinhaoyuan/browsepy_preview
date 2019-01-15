@@ -23,9 +23,54 @@
     }
   </style>
   <script>
-    function preview_open(url) {
-      window.frames["preview-frame"].location = url;
+    function preview_request(request_url) {
+      var req = new XMLHttpRequest();
+      req.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var data = JSON.parse(this.responseText);
+          preview_append(data["mimetype"], data["url"]);
+        }
+      };
+      req.open("GET", request_url, true);
+      req.send();
     }
+
+    function preview_append(mimetype, url) {
+      var doc = window.frames["preview-frame"].document;
+      var container = doc.createElement("div");
+      var label = doc.createElement("div");
+      var filename = doc.createElement("span");
+      filename.classList.add("filename");
+      filename.appendChild(doc.createTextNode(url));
+      var type = doc.createElement("span");
+      type.classList.add("filetype");
+      type.appendChild(doc.createTextNode(mimetype));
+      label.appendChild(filename);
+      label.appendChild(type);
+      var content = doc.createElement("div");
+      if (mimetype.startsWith("image/")) {
+        var img = doc.createElement("img");
+        img.src = url;
+        content.appendChild(img);
+      }
+      else {
+        // nothing to show
+      }
+      container.appendChild(label);
+      container.appendChild(content);
+      label.style.cursor = "not-allowed";
+      label.addEventListener("click", function () { container.parentNode.removeChild(container); }); 
+      doc.body.append(container);
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      var doc = window.frames["preview-frame"].document; 
+      var link  = doc.createElement('link');
+      link.rel  = 'stylesheet';
+      link.type = 'text/css';
+      link.href = '/preview/static/css/preview.css';
+      doc.head.appendChild(link);
+    });
   </script>
 </head>
 <body>

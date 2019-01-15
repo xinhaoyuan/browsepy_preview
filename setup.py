@@ -17,6 +17,7 @@ setuptools.setup(
     package_data = {"browsepy_preview" :
                     [ "static/javascript/main.js",
                       "static/css/styles.css",
+                      "static/css/preview.css",
                       "templates/preview_parent_window.html"
                     ]},
     install_requires = ["browsepy"],

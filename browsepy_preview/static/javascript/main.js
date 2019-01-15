@@ -14,5 +14,5 @@ else {
 
 function previewClicked(e) {
     e.preventDefault();
-    window.parent.preview_open(e.target.href);
+    window.parent.preview_request(e.target.href);
 }
