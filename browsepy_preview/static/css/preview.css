@@ -11,6 +11,10 @@ div.content {
     padding: 0.5em;
 }
 
+div.content img {
+    max-width: 100%;
+}
+
 div.container {
     border: 1px black solid;
     margin-bottom: 0.5em;

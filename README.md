@@ -2,6 +2,10 @@ This is a browsepy plugin to preview files without downloading or opening new wi
 
 It is handy for viewing data and figures generated on servers.
 
+# Demo
+
+(demo.png?raw=true)
+
 # Usage
 
 python -m browsepy --plugin=preview ...
