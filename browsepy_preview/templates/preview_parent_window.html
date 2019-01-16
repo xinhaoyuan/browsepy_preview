@@ -54,7 +54,7 @@
       var content = doc.createElement("div");
       if (mimetype.startsWith("image/")) {
         var img = doc.createElement("img");
-        img.src = url;
+        img.src = url + "?" + String((new Date).getTime());
         img.addEventListener("load", function () { win.scrollTo(0, doc.body.scrollHeight); });
         content.appendChild(img);
       }

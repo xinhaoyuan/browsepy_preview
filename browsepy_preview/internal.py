@@ -33,7 +33,7 @@ def view_file(path):
     try:
         file = browsepy.file.Node.from_urlpath(path)
         if file.is_file and not file.is_excluded:
-            return flask.send_from_directory(file.parent.path, file.name, cache_timeout = -1)
+            return flask.send_from_directory(file.parent.path, file.name, cache_timeout = 0)
     except OutsideDirectoryBase:
         pass
     flask.abort(404)
