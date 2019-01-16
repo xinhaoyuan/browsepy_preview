@@ -4,7 +4,7 @@ It is handy for viewing data and figures generated on servers.
 
 # Demo
 
-(demo.png?raw=true)
+![Screenshot](demo.png?raw=true)
 
 # Usage
 
