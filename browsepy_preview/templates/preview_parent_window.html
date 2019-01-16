@@ -23,6 +23,8 @@
     }
   </style>
   <script>
+    var req_element = {};
+
     function preview_request(request_url) {
       var req = new XMLHttpRequest();
       req.onreadystatechange = function() {
@@ -65,8 +67,21 @@
       container.appendChild(content);
       container.classList.add("container");
       label.style.cursor = "not-allowed";
-      label.addEventListener("click", function () { container.parentNode.removeChild(container); });
-      doc.body.append(container);
+      label.addEventListener("click", function () { del_container(url); });
+      del_container(url);
+      add_container(url, container);
+    }
+
+    function add_container(id, container) {
+      req_element[id] = container;
+      window.frames["preview-frame"].document.body.append(container);
+    }
+
+    function del_container(id) {
+      if (id in req_element) {
+        window.frames["preview-frame"].document.body.removeChild(req_element[id]);
+        delete req_element[id];
+      }
     }
 
     document.addEventListener("DOMContentLoaded", function() {
