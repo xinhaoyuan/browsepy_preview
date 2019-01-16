@@ -67,9 +67,16 @@ def register_plugin(manager):
         filename = 'javascript/main.js')
 
     manager.register_widget(
+        place = 'header',
+        type = 'button',
+        endpoint = 'browse',
+        text = "refresh")
+
+    manager.register_widget(
         place = 'entry-actions',
         css = 'preview',
         type = 'button',
         endpoint = 'preview.preview_info',
         text = "Preview",
         filter = preview_filter)
+
