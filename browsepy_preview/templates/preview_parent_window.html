@@ -30,14 +30,14 @@
       req.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           var data = JSON.parse(this.responseText);
-          preview_append(data["mimetype"], data["url"]);
+          preview_add(data["mimetype"], data["url"]);
         }
       };
       req.open("GET", request_url, true);
       req.send();
     }
 
-    function preview_append(mimetype, url) {
+    function preview_add(mimetype, url) {
       var win = window.frames["preview-frame"];
       var doc = win.document;
       var container = doc.createElement("div");
@@ -55,12 +55,10 @@
       if (mimetype.startsWith("image/")) {
         var img = doc.createElement("img");
         img.src = url + "?" + String((new Date).getTime());
-        img.addEventListener("load", function () { win.scrollTo(0, doc.body.scrollHeight); });
         content.appendChild(img);
       }
       else {
-        // nothing to load. immediately scroll
-        win.setTimeout(function () { win.scrollTo(0, doc.body.scrollHeight); }, 0);
+        // nothing to load.
       }
       content.classList.add("content");
       container.appendChild(label);
@@ -70,11 +68,12 @@
       label.addEventListener("click", function () { del_container(url); });
       del_container(url);
       add_container(url, container);
+      win.scrollTo(0, 0);
     }
 
     function add_container(id, container) {
       req_element[id] = container;
-      window.frames["preview-frame"].document.body.append(container);
+      window.frames["preview-frame"].document.body.prepend(container);
     }
 
     function del_container(id) {
