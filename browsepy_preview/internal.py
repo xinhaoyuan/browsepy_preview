@@ -24,19 +24,8 @@ def detect_preview_mimetype(path, sep = os.sep):
 @preview.route('/preview_info/<path:path>')
 def preview_info(path):
     file = browsepy.file.Node.from_urlpath(path)
-    return flask.Response(json.dumps({ "mimetype" : file.type, "url" : "/preview/view/" + path}),
+    return flask.Response(json.dumps({ "mimetype" : file.type, "url" : "/open/" + path}),
                           mimetype = "text/json")
-
-@preview.route('/view/<path:path>')
-def view_file(path):
-    # copied from open in browsepy, but explicitly disable cache
-    try:
-        file = browsepy.file.Node.from_urlpath(path)
-        if file.is_file and not file.is_excluded:
-            return flask.send_from_directory(file.parent.path, file.name, cache_timeout = 0)
-    except OutsideDirectoryBase:
-        pass
-    flask.abort(404)
 
 # This will be redirected from main.js
 
@@ -71,12 +60,3 @@ def register_plugin(manager):
         type = 'button',
         endpoint = 'browse',
         text = "refresh")
-
-    manager.register_widget(
-        place = 'entry-actions',
-        css = 'preview',
-        type = 'button',
-        endpoint = 'preview.preview_info',
-        text = "Preview",
-        filter = preview_filter)
-
