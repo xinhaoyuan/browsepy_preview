@@ -48,6 +48,11 @@
     }
 
     function preview_add(mimetype, url) {
+      if (!mimetype.startsWith("image/")) {
+        var new_win = window.open();
+        new_win.location = url;
+        return;
+      }
       var win = window.frames["preview-frame"];
       var doc = win.document;
       var container = doc.createElement("div");
@@ -111,7 +116,6 @@
           }
           else if (ele.classList.contains("hide")) {
             ele.classList.remove("hide");
-
           }
           else {
             ele.classList.add("small");
