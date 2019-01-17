@@ -118,9 +118,13 @@
   </script>
 </head>
 <body>
-  <table style="height: 100%; width: 100%;"><tbody><tr>
-        <td id="main-frame-container"><iframe class="main" name="main-frame" src="/{{path}}"></iframe></td>
-        <td id="change-layout" style="width: 0; cursor: pointer; background: #ddd;">&#8635;</td>
-        <td id="preview-frame-container"><iframe class="preview" id="preview-frame" name="preview-frame"></iframe></td>
-  </tr></tbody></table>
+  <table style="height: 100%; width: 100%;"><tbody>
+      <tr><td id="change-layout" style="height: 0; cursor: pointer; background: #ddd; text-align: center;">&#x2B7E;</td></tr>
+      <tr><td style="height: 100%;">
+          <table style="height: 100%; width: 100%;"><tbody><tr>
+                <td id="main-frame-container"><iframe class="main" name="main-frame" src="/{{path}}"></iframe></td>
+                <td id="preview-frame-container"><iframe class="preview" id="preview-frame" name="preview-frame"></iframe></td>
+          </tr></tbody></table>
+      </td></tr>
+  </tbody></table>
 </body>
